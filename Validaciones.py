@@ -34,8 +34,7 @@ def validar_dato_numerico(dato)-> bool:
         if not (ord(i) >= ord('0') and ord(i) <= ord('9')):
             result = False
     
-    return result
-    
+    return result    
 
 def validar_dato_string(dato:str)-> bool:
     """
@@ -54,8 +53,6 @@ def validar_dato_string(dato:str)-> bool:
             result = False
 
     return result 
-
-
 
 def validar_calificacion(calificacion:int)-> bool:
     """

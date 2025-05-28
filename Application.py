@@ -10,7 +10,7 @@ def mostrar_menu():
     print("4 - Ordenar promedios.")
     print("5 - Calcular promedios de materias.")
     print("6 - Buscar datos de un estudiante por legajo.")
-    print("7 - None.")
+    print("7 - Buscar cantidad de notas por materia.")
     print("8 - Salir.")
 
                 
