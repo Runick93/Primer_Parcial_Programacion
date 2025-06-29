@@ -78,9 +78,9 @@ def imprimir_promedios_materias(lista_promedios_materias:list, lista_nombres_mat
         print(f"{lista_nombres_materias[i]}:   {lista_promedios_materias[i]}")
     print("")
 
-def imprimir_materia_mayor_promedio(lista_promedios_materias:list, lista_nombres_materias:list, ):
-    # buscar materia con mayor promedio
-    # Imprimirla
+def imprimir_materia_mayor_promedio(lista_promedios_materias:list, lista_nombres_materias:list):
+    # aplicar lo de maximos y minimos
+    
     mayor_promedio = lista_promedios_materias[0]
 
     print("Materia/s con mayor promedio:")
