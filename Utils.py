@@ -45,31 +45,30 @@ def imprimir_todos_los_datos(matriz_notas:list, lista_nombres:list, lista_genero
         None.
     """
 
-
+    print(f"{'ESTUDIANTE':<17}{'|LEGAJO':<10}{'|GENERO':<10}{'|NOTAS':<30}{'|PROMEDIO'}")
     for i in range(len(matriz_notas)):
-        print(lista_nombres[i], end="\t | ")
-        print(lista_generos[i], end="\t | ")
-        print(lista_legajos[i], end="\t | ")
+        print(f"{lista_nombres[i]:<17}", end="| ")
+        print(f"{lista_legajos[i]:<8}", end="| ")
+        print(f"{lista_generos[i]:<8}",  end="| ")
 
         for j in range(len(matriz_notas[i])):
-            print(matriz_notas[i][j], end="\t | ")
+            print(f"{matriz_notas[i][j]:<4}", end="| ")
         
-        print(lista_promedios[i], end="\t | ")
+        print(f"{lista_promedios[i]:<8}", end="| ")
         print("")
     print("")
     
 
 def imprimir_datos_alumno(lista_datos_del_alumno:list):
-    lista_cabecera = ["Nombre", "Legajo", "Genero", "Materia_1", "Materia_2", "Materia_3", "Materia_4", "Materia_5", "Promedio"]
-    
+    print(f"{'ESTUDIANTE':<11}{'|LEGAJO':<13}{'|GENERO':<13}{'|NOTAS':<65}{'|PROMEDIO'}")
     for i in range(len(lista_datos_del_alumno)):
-        print(f"{lista_cabecera[i]}:   {lista_datos_del_alumno[i]}")
+        print(f"{lista_datos_del_alumno[i]:<11}", end="| ")
     print("")
 
 def imprimir_datos_materia(lista_notas_de_materia:list):
     lista_cabecera = ["Notas_con_1", "Notas_con_2", "Notas_con_3", "Notas_con_4", "Notas_con_5", "Notas_con_6", "Notas_con_7", "Notas_con_8", "Notas_con_9", "Notas_con_10"]
     for i in range(len(lista_notas_de_materia)):
-        print(f"{lista_cabecera[i]}:   {lista_notas_de_materia[i]}")
+        print(f"Notas_con_{i+1}: {lista_notas_de_materia[i]}")
     print("")
 
 def imprimir_promedios_materias(lista_promedios_materias:list, lista_nombres_materias:list):

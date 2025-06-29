@@ -34,36 +34,14 @@ while continuar:
             Utils.ordenar_promedios(lista_nombres, lista_legajos, lista_generos, matriz_notas, lista_promedios_alumnos)
 
         case "5":
-
-            # orquestar esto en application
-            lista_promedios_materias = Application.calcular_promedios_por_materia(matriz_notas)
-            lista_nombres_materias = Application.generar_lista_nombres_materias(lista_promedios_materias)
-            
-            Utils.ordenar_promedios_materias_desc(lista_promedios_materias, lista_nombres_materias)
-            Utils.imprimir_promedios_materias(lista_promedios_materias, lista_nombres_materias)
-
-            Utils.imprimir_materia_mayor_promedio(lista_promedios_materias, lista_nombres_materias)
+            Application.promedios_de_materias(matriz_notas)
 
         case "6":
-
-            #orquestar en application
-            legajo = int(input("Ingrese el legajo q desea buscar: "))
-            print("")
-
-            lista_datos_del_alumno = Utils.buscar_estudiante_por_legajo(legajo, lista_legajos, lista_nombres, lista_generos, matriz_notas, lista_promedios_alumnos)
-            
-            if len(lista_datos_del_alumno) > 0:
-                Utils.imprimir_datos_alumno(lista_datos_del_alumno)
-
-            else:
-                print(f"No se encontro el legajo {legajo}.")
-
-        case "7":
-            #orquestar en application
-            nro_materia = int(input("Ingrese el numero de materia: "))
-            lista_notas_de_materia = Utils.buscar_cantidad_de_notas(matriz_notas, 1)
-            Utils.imprimir_datos_materia(lista_notas_de_materia)                
+            Application.buscar_alumno_por_legajo(lista_nombres, lista_legajos, lista_generos, matriz_notas, lista_promedios_alumnos)
         
+        case "7":
+            Application.cantidad_de_notas_por_materia(matriz_notas)
+
         case "8":
             print("Hasta luego")
             continuar = False
