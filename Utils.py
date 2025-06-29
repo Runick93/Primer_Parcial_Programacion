@@ -20,7 +20,19 @@ def inicializar_matriz(cantidad_filas: int, cantidad_columnas: int, valor_inicia
 
 
 # -------------- Prints
-def imprimir_todos_los_datos(matriz_notas:list, lista_nombres:list, lista_generos:list, lista_legajos:list):
+def imprimir_menu():
+    print("Menú de opciones:")
+    print("1 - Cargar notas de estudiantes.")
+    print("2 - Mostrar estudiantes.")
+    print("3 - Calcular promedio de alumnos.")
+    print("4 - Ordenar promedios DESC.")
+    print("5 - Calcular promedios de materias.")
+    print("6 - Buscar datos de un estudiante por legajo.")
+    print("7 - Buscar cantidad de notas por materia.")
+    print("8 - Salir.")
+    print("")
+
+def imprimir_todos_los_datos(matriz_notas:list, lista_nombres:list, lista_generos:list, lista_legajos:list, lista_promedios:list):
     """
     Imprime tdos los datos de los alumnos.
     
@@ -32,56 +44,53 @@ def imprimir_todos_los_datos(matriz_notas:list, lista_nombres:list, lista_genero
     Returns:
         None.
     """
+
+
     for i in range(len(matriz_notas)):
         print(lista_nombres[i], end="\t | ")
         print(lista_generos[i], end="\t | ")
         print(lista_legajos[i], end="\t | ")
-        
+
         for j in range(len(matriz_notas[i])):
             print(matriz_notas[i][j], end="\t | ")
+        
+        print(lista_promedios[i], end="\t | ")
         print("")
-
-
-def imprimir_promedios(lista_promedios:list, lista_nombres:list):
-    """
-    Imprime los nombres y los promedios.
+    print("")
     
-    Args:
-        lista_promedios: Lista con los promedios de cada alumno.
-        lista_nombres: Lista con los nombres de cada alumno.
-    Returns:
-        None.
-    """
-    for i in range(len(lista_promedios)):
-        print(lista_nombres[i], end="\t | ")
-        print(lista_promedios[i])
-        print("")
 
-def imprimir_matriz(matriz: list):
-    """
-    Imprime una matriz.
+def imprimir_datos_alumno(lista_datos_del_alumno:list):
+    lista_cabecera = ["Nombre", "Legajo", "Genero", "Materia_1", "Materia_2", "Materia_3", "Materia_4", "Materia_5", "Promedio"]
     
-    Args:
-        matriz: Matriz que se desea imprimir.
-    Returns:
-        None.
-    """
-    for i in range(len(matriz)):        
-        for j in range(len(matriz[i])):
-            print(matriz[i][j], end="\t | ")
-        print("")
+    for i in range(len(lista_datos_del_alumno)):
+        print(f"{lista_cabecera[i]}:   {lista_datos_del_alumno[i]}")
+    print("")
 
-def imprimir_lista(lista:list):
-    """
-    Imprime una lista.
-    
-    Args:
-        lista: Lista que se desea imprimir.
-    Returns:
-        None.
-    """
-    for i in range(len(lista)):
-        print(lista[i], end="\t | ")
+def imprimir_datos_materia(lista_notas_de_materia:list):
+    lista_cabecera = ["Notas_con_1", "Notas_con_2", "Notas_con_3", "Notas_con_4", "Notas_con_5", "Notas_con_6", "Notas_con_7", "Notas_con_8", "Notas_con_9", "Notas_con_10"]
+    for i in range(len(lista_notas_de_materia)):
+        print(f"{lista_cabecera[i]}:   {lista_notas_de_materia[i]}")
+    print("")
+
+def imprimir_promedios_materias(lista_promedios_materias:list, lista_nombres_materias:list):
+    print("Promedios de cada materia:")
+    for i in range(len(lista_promedios_materias)):
+        print(f"{lista_nombres_materias[i]}:   {lista_promedios_materias[i]}")
+    print("")
+
+def imprimir_materia_mayor_promedio(lista_promedios_materias:list, lista_nombres_materias:list, ):
+    # buscar materia con mayor promedio
+    # Imprimirla
+    mayor_promedio = lista_promedios_materias[0]
+
+    print("Materia/s con mayor promedio:")
+    for i in range(0, len(lista_promedios_materias), 1):
+        if lista_promedios_materias[i] == mayor_promedio:
+            nombre = lista_nombres_materias[i]
+            promedio = lista_promedios_materias[i]
+            print(f"{nombre}: {promedio}")
+        else:
+            break 
     print("")
 
 # -------------- Helpers
@@ -131,7 +140,7 @@ def to_lower(cadena: str) -> str:
 
 
 # -------------- Ordenamiento
-def ordenar_promedios(lista_promedios:list, lista_nombres:list, modo_ordenamiento = "desc") -> None:
+def ordenar_promedios(lista_nombres:list, lista_legajos:list, lista_generos:list, matriz_notas:list, lista_promedios:list, modo_ordenamiento = "desc") -> None:
     """
     Ordena los promedios de manera ascendente o descendente
     
@@ -153,6 +162,18 @@ def ordenar_promedios(lista_promedios:list, lista_nombres:list, modo_ordenamient
                 lista_nombres[i] = lista_nombres[j]
                 lista_nombres[j] = aux_nombre
 
+                aux_legajos = lista_legajos[i]
+                lista_legajos[i] = lista_legajos[j]
+                lista_legajos[j] = aux_legajos
+
+                aux_generos = lista_generos[i]
+                lista_generos[i] = lista_generos[j]
+                lista_generos[j] = aux_generos
+
+                aux_notas = matriz_notas[i]
+                matriz_notas[i] = matriz_notas[j]
+                matriz_notas[j] = aux_notas
+
                 aux_promedio = lista_promedios[i]
                 lista_promedios[i] = lista_promedios[j]
                 lista_promedios[j] = aux_promedio
@@ -165,23 +186,41 @@ def ordenar_promedios(lista_promedios:list, lista_nombres:list, modo_ordenamient
                     lista_nombres[i] = lista_nombres[j]
                     lista_nombres[j] = aux_nombre
 
+                    aux_legajos = lista_legajos[i]
+                    lista_legajos[i] = lista_legajos[j]
+                    lista_legajos[j] = aux_legajos
+
+                    aux_generos = lista_generos[i]
+                    lista_generos[i] = lista_generos[j]
+                    lista_generos[j] = aux_generos
+                    
+                    aux_notas = matriz_notas[i]
+                    matriz_notas[i] = matriz_notas[j]
+                    matriz_notas[j] = aux_notas
+
                     aux_promedio = lista_promedios[i]
                     lista_promedios[i] = lista_promedios[j]
                     lista_promedios[j] = aux_promedio
 
+def ordenar_promedios_materias_desc(lista_promedios_materias: list, lista_nombres_materias: list):
+    for i in range(0, len(lista_promedios_materias) - 1, 1):
+        for j in range(i + 1, len(lista_promedios_materias), 1):
+            if lista_promedios_materias[i] < lista_promedios_materias[j]:
 
-# -------------- Busqueda
-def imprimir_materia_mayor_promedio(lista_promedios_materias: list, lista_nombres_materias: list):
-    maximo = None
-    indice_maximo = 0
-    
-    for i in range(len(lista_promedios_materias)):
-        if maximo == None or lista_promedios_materias[i] > maximo:
-            maximo = lista_promedios_materias[i]
-            indice_maximo = i
+                aux_prom = lista_promedios_materias[i]
+                lista_promedios_materias[i] = lista_promedios_materias[j]
+                lista_promedios_materias[j] = aux_prom
 
-    print("Materia con mayor promedio:")
-    print(f"{lista_nombres_materias[indice_maximo]}\t{maximo}\n")
+                aux_nombre = lista_nombres_materias[i]
+                lista_nombres_materias[i] = lista_nombres_materias[j]
+                lista_nombres_materias[j] = aux_nombre
+
+
+def buscar_materias_con_mayor_promedio(lista_promedios_materias: list, lista_nombres_materias: list):
+    ordenar_promedios_materias_desc(lista_promedios_materias, lista_nombres_materias)
+
+
+
 
 #buscar_estudiante_por_legajo.
 def buscar_estudiante_por_legajo(legajo:int, lista_legajos, lista_nombres, lista_generos, matriz_notas, lista_promedios_alumnos)->list:
@@ -199,16 +238,16 @@ def buscar_estudiante_por_legajo(legajo:int, lista_legajos, lista_nombres, lista
         list: retorna una lista con los datos de cada alumno.
     """
     indice_legajo = -1
-    retorno_datos = []  # LEGAJO, NOMBRE ALUMNO, GENERO, NOTAS, PROMEDIO
+    retorno_datos = []
 
     for i in range(len(lista_legajos)):
         if lista_legajos[i] == legajo:
             indice_legajo = i
             break
 
-    if indice_legajo > -1:
-        retorno_datos += [legajo]
+    if indice_legajo > -1:        
         retorno_datos += [lista_nombres[indice_legajo]]
+        retorno_datos += [legajo]
         retorno_datos += [lista_generos[indice_legajo]]
 
         for i in range(len(matriz_notas[indice_legajo])):

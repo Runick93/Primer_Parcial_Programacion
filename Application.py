@@ -1,18 +1,6 @@
 import random
 import Utils
 import Validaciones
-
-def mostrar_menu():
-    print("Menú de opciones:")
-    print("1 - Cargar notas de estudiantes.")
-    print("2 - Mostrar estudiantes.")
-    print("3 - Calcular promedio de alumnos.")
-    print("4 - Ordenar promedios.")
-    print("5 - Calcular promedios de materias.")
-    print("6 - Buscar datos de un estudiante por legajo.")
-    print("7 - Buscar cantidad de notas por materia.")
-    print("8 - Salir.")
-
                 
 def cargar_notas(matriz_notas: list) -> list:
     for i in range(len(matriz_notas)):
@@ -87,3 +75,14 @@ def generar_lista_nombres_materias(lista_promedios_materias: list)->list:
         lista_nombres_materias[i] = f"Materia_{i+1}"
     
     return lista_nombres_materias
+
+def obtener_materia_mayor_promedio(lista_promedios_materias: list, lista_nombres_materias: list) -> str:
+    mayor_promedio = lista_promedios_materias[0]
+    posicion_mayor = 0
+
+    for i in range(1, len(lista_promedios_materias), 1):
+        if lista_promedios_materias[i] > mayor_promedio:
+            mayor_promedio = lista_promedios_materias[i]
+            posicion_mayor = i
+
+    return lista_nombres_materias[posicion_mayor]
